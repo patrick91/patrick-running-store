@@ -1,3 +1,6 @@
+import { SignIn } from "@/components/signin";
+import { TShirtCard } from "@/components/tshirt-card";
+import { UserAvatar } from "@/components/user-avatar";
 import Image from "next/image";
 
 async function getProducts() {
@@ -31,37 +34,34 @@ function Product({
     name: string;
     id: string;
     images: Array<{ url: string; width: number; height: number }>;
+    variants: Array<{
+      id: string;
+      name: string;
+      unitPrice: {
+        value: number;
+        currency: string;
+      };
+    }>;
   };
 }) {
-  const image = product.images[0];
-  return (
-    <div>
-      <h2>{product.name}</h2>
-
-      <Image
-        src={image.url}
-        alt={product.name}
-        width={image.width}
-        height={image.height}
-      />
-    </div>
-  );
+  return <TShirtCard product={product} />;
 }
 
 export default async function Home() {
   const products = await getProducts();
 
-  console.log(products[0]);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold">Products</h1>
 
+      <UserAvatar />
       <div className="grid grid-cols-3 gap-4">
         {products.map((product) => (
           <Product key={product.id} product={product} />
         ))}
       </div>
+
+      <SignIn />
     </main>
   );
 }
