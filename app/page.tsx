@@ -3,8 +3,11 @@ import { Search } from "@/components/search";
 import { SignIn } from "@/components/signin";
 import { UserAvatar } from "@/components/user-avatar";
 import { fetchActivities } from "@/lib/strava";
+import { Metadata } from "next";
 
-// import "instantsearch.css/themes/satellite.css";
+export const metadata: Metadata = {
+  title: "Patrick's Running Store",
+};
 
 export default async function Home() {
   const session = await auth();
@@ -15,6 +18,7 @@ export default async function Home() {
   };
 
   if (session?.user) {
+    // @ts-ignore
     const activities = await fetchActivities(session.accessToken, 365);
 
     stats = {
@@ -29,7 +33,7 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col p-24 gap-4">
       <header className="flex justify-between items-center">
-        <h1 className="text-7xl font-bold">Patrick's Running Store</h1>
+        <h1 className="text-7xl font-bold">Patrick&apos;s Running Store</h1>
 
         <UserAvatar />
       </header>

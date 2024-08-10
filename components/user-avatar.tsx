@@ -8,7 +8,7 @@ export async function UserAvatar() {
   return (
     <div>
       <img
-        src={session.user.image}
+        src={session.user.image ?? "https://placekitten.com/200/200"}
         alt="User Avatar"
         className="rounded-full"
       />

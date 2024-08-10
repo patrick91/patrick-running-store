@@ -9,7 +9,7 @@ import {
 } from "react-instantsearch";
 import { TShirtCard } from "./tshirt-card";
 
-export const Hit = ({ hit }) => {
+export const Hit = ({ hit }: any) => {
   return <TShirtCard product={hit} />;
 };
 
@@ -41,7 +41,8 @@ export const Search = ({ maxDistance }: { maxDistance: number }) => {
     <InstantSearch searchClient={searchClient} indexName="products">
       <Configure
         hitsPerPage={15}
-        numericFilters={`minRun < ${maxDistanceInKm}`}
+        numericFilters={`minRun <= ${maxDistanceInKm}`}
+        distinct
       />
 
       <div className="ais-InstantSearch">

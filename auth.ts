@@ -8,14 +8,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
+        // @ts-ignore
         token.accessToken = account.access_token;
-        token.stravaId = account.athlete.id;
       }
       return token;
     },
     async session({ session, token }) {
+      // @ts-ignore
       session.accessToken = token.accessToken;
-      session.stravaId = token.stravaId;
 
       return session;
     },

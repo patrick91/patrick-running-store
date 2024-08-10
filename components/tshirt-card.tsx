@@ -9,12 +9,12 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useState } from "react";
 
 export function TShirtCard({
   product,
 }: {
   product: {
+    price: number;
     name: string;
     slug: string;
     minRun: number;
@@ -33,10 +33,8 @@ export function TShirtCard({
     }>;
   };
 }) {
-  const [currentVariant, setCurrentVariant] = useState(null);
-
-  console.log(product);
-  const variants = [];
+  // @ts-ignore
+  const variants: any = [];
 
   return (
     <Card className="w-full min-w-[320px] relative">
@@ -62,21 +60,28 @@ export function TShirtCard({
           />
         </div>
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold">TODO: Add price here</div>
+          <div className="text-2xl font-bold">${product.price}</div>
           <div className="flex items-center gap-2">
-            <Select onValueChange={setCurrentVariant}>
+            <Select>
               <SelectTrigger className="w-fit [&>span]:pr-4">
                 <SelectValue placeholder="Size" />
               </SelectTrigger>
               <SelectContent>
-                {variants.map((variant) => (
+                {variants.map((variant: any) => (
                   <SelectItem key={variant.id} value={variant.id}>
                     {variant.attributes.description}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
-            <Button size="sm">🛒</Button>
+            <Button
+              size="sm"
+              onClick={() => {
+                alert("Sorry faddah 💔");
+              }}
+            >
+              🛒
+            </Button>
           </div>
         </div>
       </div>

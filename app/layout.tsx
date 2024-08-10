@@ -16,7 +16,7 @@ const fontBody = IBM_Plex_Mono({
   weight: "400",
 });
 
-export default function Layout({ children }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body

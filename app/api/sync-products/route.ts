@@ -28,32 +28,30 @@ export async function GET(request: Request) {
   const products = await getProducts();
 
   const client = algoliasearch(
-    process.env.ALGOLIA_APP_ID,
-    process.env.ALGOLIA_API_KEY,
+    process.env.ALGOLIA_APP_ID!,
+    process.env.ALGOLIA_API_KEY!,
   );
 
-  const index = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
+  const index = client.initIndex(process.env.ALGOLIA_INDEX_NAME!);
 
-  const allProducts = [];
-
-  products.forEach((product) => {
-    product.variants.forEach((variant) => {
-      allProducts.push({
-        id: variant.id,
-        slug: product.slug,
-        name: product.name,
-        description: product.description,
-        image: variant.images[0].url,
-        minRun: getMinRun(product),
-      });
-    });
-  });
+  const allProducts = products.flatMap((product) =>
+    product.variants.flatMap((variant) => ({
+      id: variant.id,
+      slug: product.slug,
+      name: product.name,
+      description: product.description,
+      image: variant.images[0].url,
+      minRun: getMinRun(product),
+      price: variant.unitPrice.value,
+    })),
+  );
 
   try {
     await index.saveObjects(allProducts, {
       autoGenerateObjectIDIfNotExist: true,
     });
   } catch (error) {
+    // @ts-ignore
     return new Response(error.message, { status: 500 });
   }
 
