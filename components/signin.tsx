@@ -24,7 +24,7 @@ export async function SignIn() {
         await signIn("strava");
       }}
     >
-      <button type="submit">Signin with Strava</button>
+      <button type="submit">Signin with Strava to unlock more tees</button>
     </form>
   );
 }
