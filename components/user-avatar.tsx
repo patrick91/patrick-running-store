@@ -3,13 +3,15 @@ import { auth } from "@/auth";
 export async function UserAvatar() {
   const session = await auth();
 
-  if (!session.user) return null;
-
-  console.log(session.user);
+  if (!session?.user) return null;
 
   return (
     <div>
-      <img src={session.user.image} alt="User Avatar" />
+      <img
+        src={session.user.image}
+        alt="User Avatar"
+        className="rounded-full"
+      />
     </div>
   );
 }

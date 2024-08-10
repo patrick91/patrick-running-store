@@ -1,12 +1,12 @@
-import { IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono, Foldit, Rubik_Scribble } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-const fontHeading = IBM_Plex_Mono({
+const fontHeading = Rubik_Scribble({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-heading",
-  weight: "700",
+  weight: "400",
 });
 
 const fontBody = IBM_Plex_Mono({

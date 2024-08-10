@@ -1,7 +1,28 @@
 import { getProducts } from "@/lib/fourthwall";
 import algoliasearch from "algoliasearch";
 
-export const dynamic = "force-dynamic"; // static by default, unless reading the request
+export const dynamic = "force-dynamic";
+
+const getMinRun = ({
+  name,
+  description,
+}: {
+  name: string;
+  description: string;
+}) => {
+  const steps = ["50", "42.2", "21.1", "10", "5", "3", "1"];
+
+  for (const step of steps) {
+    if (
+      name.toLowerCase().includes(`${step} km`) ||
+      description.toLowerCase().includes(`${step} km`)
+    ) {
+      return +step;
+    }
+  }
+
+  return 0;
+};
 
 export async function GET(request: Request) {
   const products = await getProducts();
@@ -23,6 +44,7 @@ export async function GET(request: Request) {
         name: product.name,
         description: product.description,
         image: variant.images[0].url,
+        minRun: getMinRun(product),
       });
     });
   });

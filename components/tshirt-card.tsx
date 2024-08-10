@@ -1,11 +1,6 @@
 "use client";
 import { Card } from "@/components/ui/card";
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import {
   Select,
   SelectTrigger,
   SelectValue,
@@ -22,6 +17,7 @@ export function TShirtCard({
   product: {
     name: string;
     slug: string;
+    minRun: number;
     description: string;
     image: string;
     variants: Array<{
@@ -39,10 +35,17 @@ export function TShirtCard({
 }) {
   const [currentVariant, setCurrentVariant] = useState(null);
 
+  console.log(product);
   const variants = [];
 
   return (
-    <Card className="w-full min-w-[320px]">
+    <Card className="w-full min-w-[320px] relative">
+      {product.minRun > 0 && (
+        <div className="absolute top-0 right-0 p-2 bg-accent text-white text-xs font-semibold rounded-bl-lg z-10">
+          {product.minRun} km ✨
+        </div>
+      )}
+
       <Image
         src={product.image}
         alt={product.name}
@@ -53,7 +56,10 @@ export function TShirtCard({
       <div className="p-4 pb-6">
         <div className="mb-2">
           <h3 className="text-lg font-semibold">{product.name}</h3>
-          <p className="text-muted-foreground text-sm">{product.description}</p>
+          <p
+            className="text-muted-foreground text-sm"
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          />
         </div>
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold">TODO: Add price here</div>
