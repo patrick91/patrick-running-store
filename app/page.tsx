@@ -26,7 +26,10 @@ export default async function Home() {
         (acc, activity) => acc + activity.distance,
         0,
       ),
-      maxDistance: Math.max(...activities.map((activity) => activity.distance)),
+      maxDistance: Math.max(
+        0,
+        ...activities.map((activity) => activity.distance),
+      ),
     };
   }
 
