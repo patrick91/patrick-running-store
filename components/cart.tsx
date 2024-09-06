@@ -4,7 +4,7 @@ import { useCart } from "./cart-context";
 import { TShirtCard } from "./tshirt-card";
 
 export function Cart() {
-  const [cartOpen, setCartOpen] = useState(true);
+  const [cartOpen, setCartOpen] = useState(false);
 
   const { cart } = useCart();
 

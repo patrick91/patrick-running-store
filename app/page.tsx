@@ -71,8 +71,10 @@ export default async function Home() {
       <header className="flex justify-between items-center">
         <h1 className="text-7xl font-bold">Patrick&apos;s Running Store</h1>
 
-        <Cart />
-        <UserAvatar />
+        <div className="flex gap-4">
+          <Cart />
+          <UserAvatar />
+        </div>
       </header>
 
       <Search maxDistance={stats.maxDistance} />
