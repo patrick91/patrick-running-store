@@ -1,4 +1,5 @@
-import { auth, unstable_update } from "@/auth";
+import { auth } from "@/auth";
+import { Cart } from "@/components/cart";
 import { Search } from "@/components/search";
 import { SignIn } from "@/components/signin";
 import { UserAvatar } from "@/components/user-avatar";
@@ -70,6 +71,7 @@ export default async function Home() {
       <header className="flex justify-between items-center">
         <h1 className="text-7xl font-bold">Patrick&apos;s Running Store</h1>
 
+        <Cart />
         <UserAvatar />
       </header>
 

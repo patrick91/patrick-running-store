@@ -1,6 +1,7 @@
 import { IBM_Plex_Mono, Foldit, Rubik_Scribble } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { CartProvider } from "@/components/cart-context";
 
 const fontHeading = Rubik_Scribble({
   subsets: ["latin"],
@@ -22,7 +23,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <body
         className={cn("antialiased", fontHeading.variable, fontBody.variable)}
       >
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );
